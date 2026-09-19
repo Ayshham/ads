@@ -1,0 +1,64 @@
+  1 #include<stdio.h>
+  2 int main()
+  3 {
+  4     int stack[100];
+  5     int top=-1;
+  6     int n,ch,val,i;
+  7     printf("enter the size of stack: ");
+  8     scanf("%d",&n);
+  9     if(n<=0||n>100)
+ 10     {
+ 11         printf("invalid size!|n");
+ 12         return 1;
+ 13     }
+ 14     while(1){
+ 15         printf("\nSTACK OPERATIONS\n");
+ 16         printf("1.PUSH\n2.POP\n3.DISPLAY\n4.EXIT\n");
+ 17         printf("enter your choice: ");
+ 18         scanf("%d",&ch);
+ 19         if(ch==1){
+ 20             if(top==n-1){
+ 21                 printf("stack overflow\n");
+ 22             }
+ 23             else{
+ 24                 for(i=0;i<=n-1;i++)
+ 25                 {
+ 26                    printf("enter value: ");
+ 27                     scanf("%d",&val);
+ 28                     top++;
+ 29                     stack[top]=val;
+ 30                      printf("%d pushed\n",val);
+ 31             }}}
+ 32         else if(ch==2){
+ 33             if(top==-1){
+ 34                 printf("stack underflow\n");
+ 35             }
+ 36             else{
+ 37                 printf("%d popped\n",stack[top]);
+ 38                 top--;
+ 39             }
+ 40         }
+ 41         else if(ch==3){
+ 42             if(top==-1){
+ 43                 printf("stack is empty\n");
+ 44             }
+ 45             else{
+ 46                 printf("stack elements are:\n");
+ 47                 for(i=top;i>=0;i--)
+ 48                 {
+ 49                     printf("%d\n",stack[i]);
+ 50                 } 
+ 51             }
+ 52         }
+ 53         else if(ch==4){
+ 54
+ 55                 break;
+ 56         }
+ 57          else{
+ 58                 printf("invalid choice\n");
+ 59              }
+ 60         }
+ 61         return 0;
+ 62     }
+
+                                                                                
