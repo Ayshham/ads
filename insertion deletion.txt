@@ -1,0 +1,401 @@
+  1 #include<stdio.h>
+  2 #include<stdlib.h>
+  3 struct Node{
+  4     int data;
+  5     struct Node*next;
+  6 };
+  7 struct Node* createNode(int data){
+  8           struct Node*newNode=malloc(sizeof(struct Node));
+  9     if(newNode==NULL){
+ 10         printf("memory allocation failed\n");
+ 11         exit(1);
+ 12     }
+ 13     newNode->data=data;
+ 14     newNode->next=NULL;
+ 15     return newNode;
+ 16 }
+ 17 void display(struct Node*head){
+ 18     struct Node*temp=head;
+ 19     if(temp==NULL){
+ 20         printf("list is empty\n");
+ 21         return;
+ 22     }
+ 23     printf("linked list: ");
+ 24     while(temp!=NULL){
+ 25         printf("%d->",temp->data);
+ 26         temp=temp->next;
+ 27     }
+ 28     printf("NULL\n");
+ 29 }
+ 30     void insertAtBeginning(struct Node**head,int data){
+ 31         struct Node*newNode=createNode(data);
+ 32         newNode->next=*head;
+ 33         *head=newNode;
+ 34     }
+ 35     void insertAtEnd(struct Node**head,int data){
+ 36         struct Node*newNode=createNode(data);
+ 37         if(*head==NULL){
+ 38             *head=newNode;
+ 39             return;
+ 40         }
+ 41         struct Node*temp=*head;
+ 42         while(temp->next!=NULL)
+ 43             temp=temp->next;
+ 44         temp->next=newNode;
+ 45     }
+ 46     void insertAtPosition(struct Node**head,int data,int position){
+ 47         if(position<1){
+ 48             printf("invalid position!\n");
+ 49             return;
+ 50         }
+ 51             if(position==1){
+ 52             insertAtBeginning(head,data);
+ 53 return;
+ 54         }
+ 55 struct Node*temp=*head;
+ 56 for(int i=1;i<position-1&&temp!=NULL;i++){
+ 57 temp=temp->next;
+ 58 }
+ 59 if(temp==NULL){
+ 60     printf("position out of range!\n");
+ 61     return;
+ 62 }
+ 63 struct Node*newNode=createNode(data);
+ 64 newNode->next=temp->next;
+ 65 temp->next=newNode;
+ 66 }
+ 67 void deleteAtBeginning(struct Node**head){
+ 68     if(*head==NULL){
+ 69 printf("list is empty\n");
+ 70 return;
+ 71     }
+ 72     struct Node*temp=*head;
+ 73     *head=temp->next;
+ 74     free(temp);
+ 75     return;
+ 76 }
+ 77 void deleteAtEnd(struct Node**head){
+ 78     if(*head==NULL){
+ 79         printf("list is empty\n");
+ 80         return;
+ 81     }
+ 82     if((*head)->next==NULL){
+ 83         free(*head);
+ 84         *head=NULL;
+ 85         return;
+ 86     }
+ 87     struct Node*temp=*head;
+ 88     while(temp->next->next!=NULL)
+ 89         temp=temp->next;
+ 90     free(temp->next);
+ 91     temp->next=NULL;
+ 92 }
+ 93 void deleteAtPosition(struct Node**head,int position){
+ 94     if(*head==NULL){
+ 95         printf("list is empty\n");
+ 96     return;
+ 97     }
+ 98     if(position<1){
+ 99         printf("invalid position\n");
+100     return;
+   }
+102     struct Node*temp=*head;
+103     if(position==1){
+104         *head=temp->next;
+105         free(temp);
+106         return;
+107     }
+108     for(int i=1;temp!=NULL && i<position-1;i++)
+109         temp=temp->next;
+110     if(temp==NULL||temp->next==NULL){
+111         printf("position out of range!\n");
+112         return;
+113     }
+114     struct Node*nextNode=temp->next->next;
+115     free(temp->next);temp->next=nextNode;
+116 }
+117 void freeList(struct Node**head){
+118     struct Node *temp;
+119     while(*head!=NULL){
+120         temp=*head;
+121         *head=(*head)->next;
+122         free(temp);
+123     }
+124 }
+125 int main(){
+126     struct Node*head=NULL;
+127     int choice,data,pos;
+128     while(1){
+129         printf("\n--linked list menu--\n");
+130         printf("1.insert at Beginning\n"
+131                 "2.insert at End\n"
+132                 "3.insert at Position\n"
+133                 "4.delete at Beginning\n"
+134                 "5.delete at End\n"
+135                 "6.delete at Position\n"
+136                " 7.Display\n"
+137                 "8.Exit\n");
+138               printf("enter your choice: ");
+139          if(scanf("%d",&choice)!=1){
+140              freeList(&head);
+141              return 0;
+142          }
+143          switch(choice){
+144 case 1:
+145                  printf("enter data: ");
+146                  scanf("%d",&data);
+147                  insertAtBeginning(&head,data);
+148                  break;
+149 case 2:
+150                  printf("enter data: ");
+151                  scanf("%d",&data);
+152                  insertAtEnd(&head,data);
+153                  break;
+154 case 3:
+155                  printf("enter data and position: ");
+156                  scanf("%d %d",&data,&pos);
+157                  insertAtPosition(&head,data,pos);
+158                  break;
+159 case 4:
+160                  deleteAtBeginning(&head);
+161                  break;
+162 case 5:
+163                  deleteAtEnd(&head);
+164                  break;
+165 case 6 :
+166                  printf("enter position: ");
+167                  scanf("%d",&pos);
+168                  deleteAtPosition(&head,pos);
+169                  break;
+170 case 7:
+171                  display(head);
+172                  break;
+173 case 8:
+174                  freeList(&head);
+175                  exit(0);
+176              default:
+177                  printf("invalid choice!\n");
+178          }
+179     }
+180     return 0;
+181
+182 }
+
+         output
+
+--linked list menu--
+1.insert at Beginning
+2.insert at End
+3.insert at Position
+4.delete at Beginning
+5.delete at End
+6.delete at Position
+ 7.Display
+8.Exit
+enter your choice: 1
+enter data: 23
+
+--linked list menu--
+1.insert at Beginning
+2.insert at End
+3.insert at Position
+4.delete at Beginning
+5.delete at End
+6.delete at Position
+ 7.Display
+8.Exit
+enter your choice: 1
+enter data: 7
+
+--linked list menu--
+1.insert at Beginning
+2.insert at End
+3.insert at Position
+4.delete at Beginning
+5.delete at End
+6.delete at Position
+ 7.Display
+8.Exit
+enter your choice: 1
+enter data: 5
+
+--linked list menu--
+1.insert at Beginning
+2.insert at End
+3.insert at Position
+4.delete at Beginning
+5.delete at End
+6.delete at Position
+ 7.Display
+8.Exit
+enter your choice: 7
+linked list: 5->7->23->NULL
+
+--linked list menu--
+1.insert at Beginning
+2.insert at End
+3.insert at Position
+4.delete at Beginning
+5.delete at End
+6.delete at Position
+ 7.Display
+8.Exit
+enter your choice: 2
+enter data: 9
+
+--linked list menu--
+1.insert at Beginning
+2.insert at End
+3.insert at Position
+4.delete at Beginning
+5.delete at End
+6.delete at Position
+ 7.Display
+8.Exit
+enter your choice: 2
+enter data: 99
+
+--linked list menu--
+1.insert at Beginning
+2.insert at End
+3.insert at Position
+4.delete at Beginning
+5.delete at End
+6.delete at Position
+ 7.Display
+8.Exit
+enter your choice: 2
+enter data: 66
+
+--linked list menu--
+1.insert at Beginning
+2.insert at End
+3.insert at Position
+4.delete at Beginning
+5.delete at End
+6.delete at Position
+ 7.Display
+8.Exit
+enter your choice: 7
+linked list: 5->7->23->9->99->66->NULL
+
+--linked list menu--
+1.insert at Beginning
+2.insert at End
+3.insert at Position
+4.delete at Beginning
+5.delete at End
+6.delete at Position
+ 7.Display
+8.Exit
+enter your choice: 3
+enter data and position: 45 3
+
+--linked list menu--
+1.insert at Beginning
+2.insert at End
+3.insert at Position
+4.delete at Beginning
+5.delete at End
+6.delete at Position
+ 7.Display
+8.Exit
+enter your choice: 7
+linked list: 5->7->45->23->9->99->66->NULL
+
+--linked list menu--
+1.insert at Beginning
+2.insert at End
+3.insert at Position
+4.delete at Beginning
+5.delete at End
+6.delete at Position
+ 7.Display
+8.Exit
+enter your choice: 4
+
+--linked list menu--
+1.insert at Beginning
+2.insert at End
+3.insert at Position
+4.delete at Beginning
+5.delete at End
+6.delete at Position
+ 7.Display
+8.Exit
+enter your choice: 4
+
+--linked list menu--
+1.insert at Beginning
+2.insert at End
+3.insert at Position
+4.delete at Beginning
+5.delete at End
+6.delete at Position
+ 7.Display
+8.Exit
+enter your choice: 7
+linked list: 45->23->9->99->66->NULL
+
+--linked list menu--
+1.insert at Beginning
+2.insert at End
+3.insert at Position
+4.delete at Beginning
+5.delete at End
+6.delete at Position
+ 7.Display
+8.Exit
+enter your choice: 5
+
+--linked list menu--
+1.insert at Beginning
+2.insert at End
+3.insert at Position
+4.delete at Beginning
+5.delete at End
+6.delete at Position
+ 7.Display
+8.Exit
+enter your choice: 7
+linked list: 45->23->9->99->NULL
+
+--linked list menu--
+1.insert at Beginning
+2.insert at End
+3.insert at Position
+4.delete at Beginning
+5.delete at End
+6.delete at Position
+ 7.Display
+8.Exit
+enter your choice: 6
+enter position: 2
+
+--linked list menu--
+1.insert at Beginning
+2.insert at End
+3.insert at Position
+4.delete at Beginning
+5.delete at End
+6.delete at Position
+ 7.Display
+8.Exit
+enter your choice: 7
+linked list: 45->9->99->NULL
+
+--linked list menu--
+1.insert at Beginning
+2.insert at End
+3.insert at Position
+4.delete at Beginning
+5.delete at End
+6.delete at Position
+ 7.Display
+8.Exit
+enter your choice: 8
+
+
+                                  
+                              
+                                                                               
