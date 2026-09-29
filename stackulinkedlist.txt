@@ -1,0 +1,119 @@
+ 1 #include <stdio.h>
+  2 #include <stdlib.h>
+  3 struct Node {
+  4  int data;
+  5  struct Node *next;
+  6 };
+  7 struct Node *top = NULL;
+  8 void push(int value) {
+  9  struct Node* newNode =  malloc(sizeof(struct Node));
+ 10  if (newNode == NULL) {
+ 11  printf("Stack overflow\n");
+ 12  return; }
+ 13  newNode->data = value;
+ 14  newNode->next = top;
+ 15  top = newNode;
+ 16  printf("%d pushed to stack\n", value);
+ 17 }
+ 18 void pop() {
+ 19  if (top == NULL) {
+ 20  printf("Stack underflow\n");
+ 21  return;
+ 22  }
+ 23  struct Node *temp = top;
+ 24  printf("%d popped from stack\n", top->data);
+ 25  top = top->next;
+ 26  free(temp);
+ 27 }
+ 28 void display() {
+ 29  if (top == NULL) {
+ 30  printf("Stack is empty!\n");
+ 31  return;
+ 32  }
+ 33  struct Node *temp = top;
+ 34  printf("Stack elements: ");
+ 35  while (temp != NULL) {
+ 36  printf("%d->", temp->data);
+ 37  temp = temp->next;
+ 38  }
+ 39  printf("NULL\n");
+ 40 }
+ 41 int main() {
+ 42  int choice, value;
+ 43  while (1) {
+ 44  printf("\n-- Stack using Linked List --\n");
+ 45  printf("1. Push\n2. Pop\n3. Display\n4. Exit\n");
+ 46  printf("Enter your choice: ");
+ 47  scanf("%d", &choice);
+ 48  switch (choice) {
+ 49  case 1: printf("Enter value to push: ");
+ 50  scanf("%d", &value);
+ 51  push(value);
+ 52  break;
+ 53  case 2: pop();
+ 54  break;
+ 55  case 3: display();
+ 56  break;
+ 57  case 4: printf("Exiting\n");
+ 58  exit(0);
+ 59  default: printf("Invalid choice!\n");
+ 60  }
+ 61  }
+ 62  return 0;
+ 63 }
+
+
+Output
+
+-- Stack using Linked List --
+1. Push
+2. Pop
+3. Display
+4. Exit
+Enter your choice: 1
+Enter value to push: 20
+20 pushed to stack
+
+-- Stack using Linked List --
+1. Push
+2. Pop
+3. Display
+4. Exit
+Enter your choice: 1
+Enter value to push: 30
+30 pushed to stack
+
+-- Stack using Linked List --
+1. Push
+2. Pop
+3. Display
+4. Exit
+Enter your choice: 1
+Enter value to push: 40
+40 pushed to stack
+
+-- Stack using Linked List --
+1. Push
+2. Pop
+3. Display
+4. Exit
+Enter your choice: 2
+40 popped from stack
+
+-- Stack using Linked List --
+1. Push
+2. Pop
+3. Display
+4. Exit
+Enter your choice: 3
+Stack elements: 30->20->NULL
+
+-- Stack using Linked List --
+1. Push
+2. Pop
+3. Display
+4. Exit
+Enter your choice: 4
+Exiting
+
+
