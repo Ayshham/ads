@@ -1,0 +1,140 @@
+  1 #include<stdio.h>
+  2 #include<stdlib.h>
+  3 struct Node{
+  4     int data;
+  5     struct Node*next;
+  6 };
+  7 int main(){
+  8     struct Node*front=NULL;
+  9     struct Node*rear=NULL;
+ 10     struct Node*newNode, *temp;
+ 11     int choice,value;
+ 12     while(1){
+ 13         printf("\n--queue using linkedlist--\n");
+ 14         printf("1.enqueue\n2.dequeue\n3.display\n4.exit\n");
+ 15         printf("enter your choice: ");
+ 16         scanf("%d",&choice);
+ 17         switch(choice){
+ 18             case 1:
+ 19                 printf("enter value to enqueue: ");
+ 20                 scanf("%d",&value);
+ 21                 newNode=(struct Node*)malloc(sizeof(struct Node));
+ 22                 if(newNode==NULL){
+ 23                     printf("queue overflow!");
+ 24                     break;
+ 25                 }
+ 26                 newNode->data=value;
+ 27                 newNode->next=NULL;
+ 28                 if(rear==NULL){
+ 29                     front=rear=newNode;
+ 30                 }
+ 31                 else{
+ 32                     rear->next=newNode;
+ 33                     rear=newNode;
+ 34                 }
+ 35                 printf("%d enqueued to queue\n",value);
+ 36                 break;
+ 37             case 2:
+ 38                 if(front==NULL){
+ 39                     printf("queue underflow\n");
+ 40                         break;
+ 41                 }
+ 42                 temp=front;
+ 43                 printf("%d dequeued from queue\n",front->data);
+ 44                 front=front->next;
+ 45                 if(front==NULL)
+ 46                     rear=NULL;
+ 47                     free(temp);
+ 48                     break;
+ 49            case 3:
+ 50                     if(front==NULL){
+ 51                         printf("queue is empty\n");
+ 52                         break;
+ 53                     }
+ 54                     temp=front;
+ 55                     printf("queue elements: ");
+ 56                     while(temp!=NULL){
+ 57                         printf("%d->",temp->data);
+ 58                         temp=temp->next;
+ 59                     }
+ 60                     printf("NULL\n");
+ 61                     break;
+ 62            case 4:
+ 63                     exit(0);
+ 64            default:
+ 65                     printf("invalid choice\n");
+ 66                 }
+ 67                 }
+ 68                 return 0;
+ 69     }
+ 70
+               OUTPUT
+--queue using linkedlist--
+1.enqueue
+2.dequeue
+3.display
+4.exit
+enter your choice: 1
+enter value to enqueue: 3
+3 enqueued to queue
+
+--queue using linkedlist--
+1.enqueue
+2.dequeue
+3.display
+4.exit
+enter your choice: 1
+enter value to enqueue: 4
+4 enqueued to queue
+
+--queue using linkedlist--
+1.enqueue
+2.dequeue
+3.display
+4.exit
+enter your choice: 1
+enter value to enqueue: 6
+6 enqueued to queue
+
+--queue using linkedlist--
+1.enqueue
+2.dequeue
+3.display
+4.exit
+enter your choice: 3
+queue elements: 3->4->6->NULL
+
+--queue using linkedlist--
+1.enqueue
+2.dequeue
+3.display
+4.exit
+enter your choice: 2
+3 dequeued from queue
+
+--queue using linkedlist--
+1.enqueue
+2.dequeue
+3.display
+4.exit
+enter your choice: 2
+4 dequeued from queue
+
+--queue using linkedlist--
+1.enqueue
+2.dequeue
+3.display
+4.exit
+enter your choice: 3
+queue elements: 6->NULL
+
+--queue using linkedlist--
+1.enqueue
+2.dequeue
+3.display
+4.exit
+enter your choice: 4
+
+
+
+                                                                   
