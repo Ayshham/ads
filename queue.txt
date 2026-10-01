@@ -59,4 +59,51 @@
  59             }
  60             return 0;
  61         }
+output
+enter size of queue: 5
+
+MENU
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+enter your choice: 1
+enter the element: 4
+enter the element: 5
+enter the element: 6
+enter the element: 7
+enter the element: 8
+enter the element: 9
+
+MENU
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+enter your choice: 2
+deleted 4
+
+MENU
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+enter your choice: 2
+deleted 5
+
+MENU
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+enter your choice: 3
+queue is: 6789
+
+MENU
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+enter your choice: 4
+
 
